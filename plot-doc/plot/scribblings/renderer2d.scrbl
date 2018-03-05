@@ -899,8 +899,7 @@ Returns a renderer that draws a point with a pict as the label on a polar functi
 
 @section[#:tag "2d-plot-snip-interactive-overlays"]{Interactive Overlays for 2D plots}
 
-@declare-exporting[plot/snip]
-@defmodule*/no-declare[(plot/snip)]
+@defmodule[plot/snip]
 
 A plot @racket[snip%] object returned by @racket[plot-snip] can be set up to
 provide interactive overlays.  This feature can be used, for example, to show
@@ -929,28 +928,28 @@ Here are a few hints for adding common interactive elements to racket plots:
 
 @itemlist[
 
-@item{@(racket hrule) and @(racket vrule) renderers can be used to draw
+@item{The @racket[hrule] and @racket[vrule] renderers can be used to draw
 horizontal and vertical lines that track the mouse position}
 
-@item{The @(racket rectangles) renderer can be used to highlight a region on
-the plot.  For example, to highlight a vertical region between @racket[xmin]
-and @racket[xmax], you can use:
+@item{The @racket[rectangles] renderer can be used to highlight a region on
+the plot.  For example, to highlight a vertical region between @racket[_xmin]
+and @racket[_xmax], you can use:
 
-@racket[
-(rectangles (list (vector (ivl xmin xmax) (ivl -inf.0 +inf.0)))
+@racketblock[
+(rectangles (list (vector (ivl _xmin _xmax) (ivl -inf.0 +inf.0)))
             #:alpha 0.2)]
 }
 
-@item{A @(racket point-label) renderer can be used to add a point with a
+@item{A @racket[point-label] renderer can be used to add a point with a
 string label to the plot.  To add only the label, use @racket['none] as the
 value for the @racket[#:point-sym] argument.}
 
-@item{A @(racket point-pict) renderer can be used to add a point with an
+@item{A @racket[point-pict] renderer can be used to add a point with an
 attached @racketmodname[pict] instead of a string label.  This can be used to
 draw fancy labels (for example with rounded corners), or any other type of
 graphics element.}
 
-@item{A @(racket points) renderer can be used to mark specific locations on
+@item{A @racket[points] renderer can be used to mark specific locations on
 the plot, without specifying a label for them}
 ]
 
@@ -962,8 +961,8 @@ An instance of this class is returned by @racket[plot-snip].
 
 Set a callback function to be invoked with mouse events from the snip.  The
 callback is invoked with the actual snip object, the @racket[mouse-event%] and
-the X, Y position of the mouse in plot coordinates -- these are in the same
-coordinate system used by the renderers in the plot.  The X, Y values are
+the X, Y position of the mouse in plot coordinates (i.e., the coordinate system
+used by the renderers in the plot).  The X and Y values are
 @racket[#f] when the mouse is outside the plot area (for example, when the
 mouse is over the axis area).
 
@@ -975,10 +974,10 @@ is disabled.  This can be restored by calling
 
 @defmethod[(set-overlay-renderers [renderers (or/c (treeof renderer2d?) #f)]) any/c]{
 
-Set a list of renderers (or more generally, a tree of renderers) to be drawn
+Set a collection of renderers to be drawn
 on top of the existing plot.  This can be any combination of 2D renderers, but
 it will not be able to modify the axes or the dimensions of the plot area.
-Only one set of overlay renderers can be installed, calling this method a
+Only one set of overlay renderers can be installed; calling this method a
 second time will replace the previous overlays.  Specifying @racket[#f] as the
 renderers will cause overlays to be disabled.
 
@@ -986,9 +985,10 @@ renderers will cause overlays to be disabled.
 }
 
 @defthing[plot-mouse-event-callback/c contract? #:value (-> (is-a?/c snip%)
-                                                       (is-a?/c mouse-event%)
-                                                       (or/c real? #f)
-                                                       (or/c real? #f) any/c)]{
+                                                            (is-a?/c mouse-event%)
+                                                            (or/c real? #f)
+                                                            (or/c real? #f)
+                                                            any/c)]{
 A contract for callback functions passed to @racket[set-mouse-event-callback].
 }
 

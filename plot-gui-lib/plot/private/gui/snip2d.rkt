@@ -70,12 +70,14 @@
     (define plot-bounds-rects empty)
 
     (define (area-bounds->plot-bounds rect)
+      ;; assumes: (rect-known? rect)
       (match-define (vector (ivl area-x-min area-x-max) (ivl area-y-min area-y-max)) rect)
       (match-define (vector x-min y-min) (send area dc->plot (vector area-x-min area-y-min)))
       (match-define (vector x-max y-max) (send area dc->plot (vector area-x-max area-y-max)))
       (vector (ivl x-min x-max) (ivl y-min y-max)))
 
     (define (plot-bounds->area-bounds rect)
+      ;; assumes (rect-known? rect)
       (match-define (vector (ivl plot-x-min plot-x-max) (ivl plot-y-min plot-y-max)) rect)
       (match-define (vector x-min y-min) (send area plot->dc (vector plot-x-min plot-y-min)))
       (match-define (vector x-max y-max) (send area plot->dc (vector plot-x-max plot-y-max)))

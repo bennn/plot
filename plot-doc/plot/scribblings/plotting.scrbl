@@ -108,7 +108,7 @@ Use @(racket plot-frame) and @(racket plot3d-frame) to create a @(racket frame%)
 
 Use @(racket plot-snip) and @(racket plot3d-snip) to create an interactive @(racket snip%) regardless of the value of @(racket plot-new-window?).
 
-@racket[snip%] objects returned by @(racket plot-snip) can be used to
+The @racket[snip%] objects returned by @racket[plot-snip] can be used to
 construct interactive plots.  See @secref["2d-plot-snip-interactive-overlays"]
 for more details.
 }
